@@ -25,8 +25,8 @@ def info(message, **kwargs):
 # Config
 #
 boost_rota = "https://impulsospublic.squareweb.app/api/v1/boost/convite"
-order_status_rota = "https://impulsospublic.squareweb.app/api/v1/order/status"
-api_key = "free"
+order_status_rota = "https://impulsospublic.squareweb.app/api/v1/order"
+api_key = "" # consiga uma api key em nosso discord (https://discord.gg/impulsos)
 tokens_file = "tokens.txt"
 useds_tokens_file = "tokens_usados.txt"
 
@@ -65,9 +65,8 @@ def remover_tokens_arquivo(linhas_usadas):
 
 def consultar_ordem(order_id: str):
     url = f"{order_status_rota}/{order_id}"
-    headers = {"Authorization": api_key}
     info("Consultando informações da ordem...", order_id=order_id)
-    resp = requests.get(url, headers=headers)
+    resp = requests.get(url)
     if resp.status_code == 200:
         dados = resp.json()
         if "order" in dados and "tokens_used" in dados["order"]:
